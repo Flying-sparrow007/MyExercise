@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>猜数字</title>
+</head>
+<script type="text/javascript">
+	//页面加载时,生成随机数
+	var ran=parseInt(Math.random()*101);
+	console.log(ran);
+	
+	function guess(){
+		//获取文本框标签的值
+		var n=document.getElementById("num").value;
+		console.log(n);
+		
+		//获取span标签
+		var span=document.getElementById("result");
+		
+		//判断该值是不是数字
+		if(isNaN(n)){//不是数字
+			span.style.color="red";
+			span.innerHTML="请合法输入数字...";
+		}else{
+			//是数字,进行比较
+			span.style.color="red";
+			if(n>ran){
+				span.innerHTML="大了";
+			}else if(n<ran){
+				span.innerHTML="小了";
+			}else{
+				span.style.color="green";
+				span.innerHTML="恭喜你猜中了!该数字是"+ran;
+			}
+		}
+	}
+	
+	function textInput(){
+		//直接给文本框标签的值赋值""(清空文本框)
+		document.getElementById("num").value="";
+	}
+</script>
+<body>
+	<input type="text" placeholder="1-100之间的数" id="num" onclick="textInput()" />
+	<input type="button" value="猜" onclick="guess()" />
+	<span id="result"></span>
+</body>
+</html>

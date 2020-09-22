@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>阶乘</title>
+<script type="text/javascript">
+	function jc(){
+		//获取文本框标签中的值
+		var n=document.getElementById("num").value;
+		console.log(n)
+		
+		//获取span标签
+		var span=document.getElementById("result");
+		
+		//判断用户输入的是不是数字
+		if(isNaN(n)){
+			//不是数字
+			span.style.color="red";
+			span.innerHTML="请合法输入数字...";
+		}else{
+			//是数字
+			span.style.color="black";
+			if(n<0){
+				span.style.color="red";
+				span.innerHTML="负数没有阶乘!";
+			}else if(n==0){
+				span.innerHTML=1;
+			}else{
+				var result=1;
+				for(var i=n;i>0;i--){
+					result*=i;
+				}
+				span.innerHTML=result;
+			}
+		}
+	}
+	
+	function textInput(){
+		//设置文本框内容为""(清空文本框)
+		document.getElementById("num").value="";
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="num" onclick="textInput()" />
+	<input type="button" value="阶乘" onclick="jc()" />
+	=<span id="result"></span>
+</body>
+</html>

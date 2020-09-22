@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>计算器</title>
+</head>
+<script type="text/javascript">
+	function cal(){
+		//获取文本框
+		var input=document.getElementById("ss");
+		
+		//获取文本框内容
+		var ss=input.value;
+		try {
+			input.style.color="black";
+			//eval()为计算机设置的方法
+			input.value=eval(ss);
+		} catch (e) {
+			input.style.color="red";
+			input.value="Error";
+		}
+	}
+	
+	function textInput(){
+		document.getElementById("ss").value="";
+	}
+</script>
+<body>
+	<input type="text" id="ss" onclick="textInput()" />
+	<input type="button" value="=" onclick="cal()" />
+</body>
+</html>

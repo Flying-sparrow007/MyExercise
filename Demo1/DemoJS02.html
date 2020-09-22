@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js基本语法</title>
+</head>
+<script type="text/javascript">
+	/*
+	   1.定义函数,该函数是在页面加载后,用户点击某按钮是调用的
+	   2.直接写js，这样的js实在页面加载时直接调用的,其调用的时机比body还早
+	*/
+	//1.声明变量,类型统一为"var"
+	var a;
+	console.log(a);
+	a=6;
+	console.log(a);
+	var b=10;
+	console.log("b="+b);
+	
+	//2.数据类型
+	var s="hello";
+	var n=3.14;
+	var b=true;//当参加运算时为1
+	var v=false;//当参加运算时为0
+	console.log(s);
+	console.log(n);
+	console.log(b);
+	
+	//3.隐式转换
+	console.log(s+n);
+	console.log(s+b);
+	console.log(n+b);
+	console.log(v+b);
+	
+	//4.强制转换
+	console.log(parseInt(3.14));
+	console.log(parseInt("5.36"));
+	console.log(parseInt("abc"));//NaN 不是数字
+	console.log(parseInt(""));
+	
+	//5.判断类型
+	console.log(typeof(s));
+	console.log(typeof(n));
+	console.log(typeof(b));
+	/*
+		是  不是数字  true
+		是  是数字    false
+		    isNaN
+	*/
+	console.log(isNaN(56));
+	console.log(isNaN("56.9"));
+	console.log(isNaN("abc"));
+	console.log(isNaN(""));//空字符串是一个数字
+	console.log("");//空字符串
+	
+	//6.运算符(+ - * / % > < = >= <= ! ==(值/内容相等) ===(全等:值/内容,类型必须一样))
+	var t=7;
+	var h="7";
+	var w=7;
+	console.log(t==h);
+	console.log(t==w);
+	console.log(t===h);
+	console.log(t===w);
+	
+	//7.条件表达式
+	/*
+		js可以用任何数据做条件,当以非布尔值做条件时,空值等价于false,非空值等价于true;
+		空值:0,null,"",NaN,undefined,这样设计的目的是为了简化判断的逻辑
+	*/
+	var k="";
+	if(k){
+		console.log(1);
+	}else{
+		console.log(2);
+	}
+	
+</script>
+<body>
+
+</body>
+</html>

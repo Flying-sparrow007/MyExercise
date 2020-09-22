@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JS(JavaScript)使用</title>
+</head>
+<!-- 1.事件定义:
+		1.1):用户在做出什么操作的时候执行js代码,例如:
+		1.2):事件就是js被调用的时机,例如,单击,双击,鼠标悬浮等
+ -->
+<!-- 2.嵌入式:
+	使用<script>标签,在标签内写js,这个<script>标签可以放在网页的任意位置,
+	通常我们放在<head>标签中,function是定义方法的关键字,js中的函数方法都是公有,
+	不需要写修饰符,不需要声明返回值类型
+ -->
+<script type="text/javascript">
+	function f2(){
+		//注释和Java中是一样的
+		//在js事件中单引号和双引号是一样的
+		alert("How are you?");
+	}
+	
+</script>
+<!-- 3.文件调用:在js文件内写js,引入到此文件中 -->
+<script type="text/javascript" src="js/DemoJS01.js"></script>
+<body>
+	<!-- 事件定义,在定义事件时直接写js -->
+	<input type="button" value="按钮1" onclick="alert('hello JS')" />
+	<input type="button" value="按钮2" onclick="f2()" />
+	<input type="button" value="按钮3" onclick="f3()" />
+	<input type="button" value="按钮4" onclick="f4()" />
+</body>
+</html>
