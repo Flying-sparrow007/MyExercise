@@ -8,8 +8,22 @@ public class SingleLink {
     private Node head;
     private Integer size;//链表长度
 
+    /**
+     * 创建单链表
+     */
     public SingleLink(){
         head = new Node();
+        initializeHeadNode();
+    }
+
+    /**
+     * 初始化头节点
+     * 在这里重新初始化头节点的原因是:
+     * 在Node类中初始化head还未存在,为了保证代码的健壮性,这里再次初始化,从而确保数据的准确性
+     */
+    private void initializeHeadNode(){
+        this.head.data = "data";
+        this.head.next = null;
     }
 
     class Node{
@@ -35,7 +49,7 @@ public class SingleLink {
      * @param val
      * @return
      */
-    public Node insertTail(Object val){
+    public boolean insertTail(Object val){
         Node newNode = new Node(val);
         Node temp = null;
         temp = this.head;
@@ -45,7 +59,7 @@ public class SingleLink {
         temp.next = newNode;
         newNode.next = null;
         size++;
-        return newNode;
+        return true;
     }
 
     /**
@@ -53,14 +67,14 @@ public class SingleLink {
      * @param val
      * @return
      */
-    public Node insertHead(Object val){
+    public boolean insertHead(Object val){
         Node newNode = new Node(val);
         Node temp = null;
         temp = this.head;
         newNode.next = temp.next;
         temp.next = newNode;
         size++;
-        return newNode;
+        return true;
     }
 
 
@@ -70,29 +84,37 @@ public class SingleLink {
      * @param index
      * @return
      */
-    public Node insertNode(Object val, Integer index){
+    public boolean insertNode(Object val, Integer index){
         Node newNode = new Node(val);
-        Integer i = 0;
+        Integer i = 0;//遍历节点的下标
         Node temp = this.head;
-        if(size <= 1){//只有头节点,即链表为空
-            System.out.println("链表为空!");
-            return null;
-        }
         if(index < 1 || index > size){//插入位置小于头节点的位置或超过最后一个节点的下一个的下一个节点
             System.out.println("插入位置不合法");
-            return null;
+            return false;
         }
-        while(temp.next != null){
+        //在链表的第一个非头节点之前插入
+        if(index == 1){
+            insertHead(val);
+            return true;
+        }
+        //在链表最后一个非头节点之后插入
+        if(index == size){
+            insertTail(val);
+            return true;
+        }
+        //在链表中间的任意位置插入
+        while(i < size - 1){
             //寻找所要插入位置的前驱节点
             if(i == index - 1){
                 newNode.next = temp.next;
                 temp.next = newNode;
-                return newNode;
+                size++;
+                return true;
             }
             i++;
             temp = temp.next;
         }
-        return null;
+        return false;
     }
 
     /**
@@ -100,7 +122,7 @@ public class SingleLink {
      * @param index
      * @return
      */
-    public Node deleteNode(Integer index){
+    public Object deleteNode(Integer index){
         Integer i = 0;
         Node temp = this.head;
         if(size <= 1){//只有头节点
@@ -111,17 +133,20 @@ public class SingleLink {
             System.out.println("删除位置不合法!");
             return null;
         }
-        while(temp.next != null){
+        //这段代码和CircleLink中的相应位置的代码重复,所以报黄
+        while(i < size - 1){//不使用temp.next != null的原因是,删除的位置有可能是最后一个节点,它的next为null
             //寻找被删节点的前驱节点
             if(i == index - 1){
                 Node deleteNode = temp.next;
-                temp.next = temp.next.next;
-                return deleteNode;
+                Node tempNext = temp.next;
+                temp.next = tempNext.next;
+                tempNext.next = null;//释放被删除的节点
+                size--;
+                return deleteNode.data;
             }
             i++;
             temp = temp.next;
         }
-        System.gc();//调用GC回收垃圾
         return null;
     }
 
@@ -142,7 +167,7 @@ public class SingleLink {
             System.out.println("查询位置不合法");
             return null;
         }
-        while(temp.next != null){
+        while(i < size){
             if(i == index){//查询到该节点
                 return temp.data;
             }
@@ -169,7 +194,7 @@ public class SingleLink {
             System.out.println("查询位置不存在");
             return null;
         }
-        while(temp.next != null){
+        while(i < size){
             if(i == index){
                 Object d = temp.data;
                 temp.data = data;
