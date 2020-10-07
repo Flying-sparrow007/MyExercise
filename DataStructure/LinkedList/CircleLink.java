@@ -1,43 +1,47 @@
 package day02;
 
 /**
- * 带头节点的单链表
+ * 循环链表
  */
-public class SingleLink {
-    /**链表类中持有节点的引用*/
-    private Node head;
+public class CircleLink {
+    private Node head;//链表
     private Integer size;//链表长度
 
     /**
-     * 创建单链表
+     * 创建头节点
      */
-    public SingleLink(){
-        head = new Node();
+    public CircleLink(){
+        this.head = new Node();
         initializeHeadNode();
     }
 
     /**
      * 初始化头节点
      * 在这里重新初始化头节点的原因是:
-     * 在Node类中初始化head还未存在,为了保证代码的健壮性,这里再次初始化,从而确保数据的准确性
+     * 在Node类里面创建的head节点的next为null(不能写head.next = head,此时的head为null)
+     * 这样会导致空链表输出时报空指针异常
      */
     private void initializeHeadNode(){
         this.head.data = "data";
-        this.head.next = null;
+        this.head.next = head;
     }
 
     class Node{
-        Object data;//节点数据
-        Node next;//下一个节点的地址
+        Object data;//数据域
+        Node next;//指针域
 
-        /**头节点*/
+        /**
+         * 头节点
+         */
         public Node(){
             this.data = "data";
             this.next = null;
             size = 1;
         }
 
-        /**非头节点*/
+        /**
+         * 非头节点
+         */
         public Node(Object data){
             this.data = data;
             this.next = null;
@@ -53,11 +57,14 @@ public class SingleLink {
         Node newNode = new Node(val);
         Node temp = null;
         temp = this.head;
-        while(temp.next != null){
+        if(temp.next == null){
+            temp.next = head;
+        }
+        while(temp.next != head){
             temp = temp.next;
         }
         temp.next = newNode;
-        newNode.next = null;
+        newNode.next = head;
         size++;
         return true;
     }
@@ -71,44 +78,44 @@ public class SingleLink {
         Node newNode = new Node(val);
         Node temp = null;
         temp = this.head;
+        if(temp.next == null){//链表不为空
+            temp.next = head;
+        }
         newNode.next = temp.next;
         temp.next = newNode;
         size++;
         return true;
     }
 
-
     /**
-     * 在指定位置插入节点
+     * 任意位置插入节点
      * @param val
      * @param index
      * @return
      */
     public boolean insertNode(Object val, Integer index){
+        Integer i = 0;
         Node newNode = new Node(val);
-        Integer i = 0;//遍历节点的下标
         Node temp = this.head;
-        if(index < 1 || index > size){//插入位置小于头节点的位置或超过最后一个节点的下一个的下一个节点
-            System.out.println("插入位置不合法");
+        if(index < 1 || index > size){//下标i是从0开始的,第i = 0标识头节点,i = size - 1表示尾节点
+            System.out.println("插入位置有误,请重新插入!");
             return false;
         }
-        //在链表的第一个非头节点之前插入
+        //在第一个非头节点之前插入
         if(index == 1){
             insertHead(val);
             return true;
         }
-        //在链表最后一个非头节点之后插入
+        //在第一个非头节点之后插入
         if(index == size){
             insertTail(val);
             return true;
         }
-        //在链表中间的任意位置插入
+        //在中间位置任意插入
         while(i < size - 1){
-            //寻找所要插入位置的前驱节点
             if(i == index - 1){
                 newNode.next = temp.next;
                 temp.next = newNode;
-                size++;
                 return true;
             }
             i++;
@@ -118,24 +125,23 @@ public class SingleLink {
     }
 
     /**
-     * 删除指定位置的节点
-     * @param index
+     * 删除节点
+     * @param
      * @return
      */
     public Object deleteNode(Integer index){
-        Integer i = 0;
+        Integer i = 0;//头节点下标为0
         Node temp = this.head;
-        if(size <= 1){//只有头节点
-            System.out.println("链表长度为空!");
+        if(size <= 1){//链表长度为1,即只有头节点
+            System.out.println("链表为空!");
             return null;
         }
-        if(index < 1 || index > size - 1){//删除位置小于第一个非头节点或大于链表长度-1
-            System.out.println("删除位置不合法!");
+        if(index < 1 || index > size - 1){//第一个非头节点下标为1,最后一个非头节点下标为size - 1
+            System.out.println("删除位置不存在!");
             return null;
         }
-        //这段代码和CircleLink中的相应位置的代码重复,所以报黄
-        while(i < size - 1){//不使用temp.next != null的原因是,删除的位置有可能是最后一个节点,它的next为null
-            //寻找被删节点的前驱节点
+        //这段代码和SingleLink中的相应位置的代码重复,所以报黄
+        while(i < size - 1){
             if(i == index - 1){
                 Node deleteNode = temp.next;
                 Node tempNext = temp.next;
@@ -150,26 +156,21 @@ public class SingleLink {
         return null;
     }
 
-    /**
-     * 查询指定位置节点的数值
-     * 从头节点开始下标为0
-     * @param index
-     * @return
-     */
     public Object searchNode(Integer index){
         Integer i = 0;
         Node temp = this.head;
-        if(size <= 1){//链表长度为1,即只有头节点
-            System.out.println("链表为空!");
+        if(size <= 1){//链表只包含头节点
+            System.out.println("链表为空,查询失败!");
             return null;
         }
-        if(index < 1 || index > size - 1){//非头节点的范围是1 <= index <= size-1
-            System.out.println("查询位置不合法");
+        if(index < 1 || index > size - 1){//非头节点的下标范围 1 <= 非头节点 <= size - 1
+            System.out.println("插入查询位置有误,请重新输入!");
             return null;
         }
-        while(i < size){
-            if(i == index){//查询到该节点
-                return temp.data;
+        while (i < size){
+            if(i == index){
+                Object data = temp.data;
+                return data;
             }
             i++;
             temp = temp.next;
@@ -178,27 +179,25 @@ public class SingleLink {
     }
 
     /**
-     * 修改指定位置节点的数值
-     * @param data
+     * 修改指定位置的节点内容
      * @param index
-     * @return
      */
-    public Object modifyNode(Object data, Integer index){
+    public Object modifyNode(Object val, Integer index){
         Integer i = 0;
         Node temp = this.head;
-        if(size <= 1){//链表长度为1,即只有头节点
-            System.out.println("链表为空!");
+        if(size <= 1){//链表只包含头节点
+            System.out.println("链表为空,修改失败!");
             return null;
         }
-        if(index < 1 || index > size-1){//非头节点的范围是1 <= index <= size-1
-            System.out.println("查询位置不存在");
+        if(index < 1 || index > size - 1){// 1 <= 非头节点下标 <= size - 1
+            System.out.println("下标输入有误,请重新输入!");
             return null;
         }
-        while(i < size){
+        while (i < size){
             if(i == index){
-                Object d = temp.data;
-                temp.data = data;
-                return d;
+                Object data = temp.data;
+                temp.data = val;
+                return data;
             }
             i++;
             temp = temp.next;
@@ -207,15 +206,21 @@ public class SingleLink {
     }
 
     /**
-     * 打印链表
+     * 输出链表
      */
     public void show(){
         Node temp = null;
         temp = head;
-        System.out.println("[" + temp.data + "->" + temp.next + "]");
-        while(temp.next != null){
+        System.out.println("内容:" + temp.data
+                        + ", 后继:" + temp.next
+                        + ", 自身:" + temp
+                            );
+        while(temp.next != head){
             temp = temp.next;
-            System.out.println("[" + temp.data + "->" + temp.next + "=" + temp + "]");
+            System.out.println("内容:" + temp.data
+                            + ", 后继:" + temp.next
+                            + ", 自身:" + temp
+                                );
         }
     }
 }

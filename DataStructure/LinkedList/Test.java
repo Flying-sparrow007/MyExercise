@@ -8,10 +8,13 @@ public class Test {
         //test.useSingleLink();
 
         //循环链表
-        test.useCircleLink();
+        //test.useCircleLink();
 
         //双向链表
         //test.useDoublyLink();
+
+        //双向循环链表
+        //test.useDoublyCircleLink();
     }
 
     /**
@@ -106,6 +109,38 @@ public class Test {
 
         //输出双向链表
         d.show();
+    }
+
+    /**
+     * 使用双向循环链表
+     */
+    private void useDoublyCircleLink(){
+        DoublyCircleLink dc = new DoublyCircleLink();
+
+        //头插法
+        /*dc.insertHead("第一个节点");
+        dc.insertHead("第二个节点");
+        dc.insertHead("第三个节点");*/
+
+        //尾插法
+        dc.insertTail("第一个节点");
+        dc.insertTail("第二个节点");
+        dc.insertTail("第三个节点");
+
+        //在指定位置插入节点
+        //dc.insertNode("第四个节点", 1);
+
+        //删除指定位置的节点
+        //dc.deleteNode(3);
+
+        //修改指定位置的节点的内容
+        //dc.modifyNode("第四个节点", 3);
+
+        //查询指定位置的节点的内容
+        //System.out.println(dc.searchNode(1));
+
+        //打印双向循环链表
+        dc.show();
     }
 
 }

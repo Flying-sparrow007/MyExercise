@@ -242,15 +242,17 @@ public class DoublyLink {
             return ;
         }
         System.out.println("内容:" + temp.data
-                            + ",前驱:"+ temp.pre
-                            + ",后继:" + temp.end
-                            + ",自身:" + temp);
+                        + ", 前驱:"+ temp.pre
+                        + ", 后继:" + temp.end
+                        + ", 自身:" + temp
+                            );
         while (temp.end != null){
             temp = temp.end;
             System.out.println("内容:" + temp.data
-                            + ",前驱:"+ temp.pre
-                            + ",后继:" + temp.end
-                            + ",自身:" + temp);
+                            + ", 前驱:"+ temp.pre
+                            + ", 后继:" + temp.end
+                            + ", 自身:" + temp
+                                );
         }
     }
 
