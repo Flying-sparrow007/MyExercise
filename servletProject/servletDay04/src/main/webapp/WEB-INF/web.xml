@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ykt2019servletDay03_1</display-name>
+  
+  <servlet>
+    <servlet-name>addServlet</servlet-name>
+    <servlet-class>web.AddUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addServlet</servlet-name>
+    <url-pattern>/add</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>listServlet</servlet-name>
+    <servlet-class>web.FindUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>listServlet</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>deleteUserById</servlet-name>
+    <servlet-class>web.DeleteUserByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteUserById</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>loginUserServlet</servlet-name>
+  	<servlet-class>web.LoginUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>loginUserServlet</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>byIdServlet</servlet-name>
+    <servlet-class>web.FindUserByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>byIdServlet</servlet-name>
+    <url-pattern>/userById</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>updateUserServlet</servlet-name>
+  	<servlet-class>web.UpdateUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>updateUserServlet</servlet-name>
+  	<url-pattern>/update</url-pattern>
+  </servlet-mapping>
+</web-app>
