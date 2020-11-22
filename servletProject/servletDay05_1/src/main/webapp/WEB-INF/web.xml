@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ykt2019servletDay05_1</display-name>
+  
+  <servlet>
+  	<servlet-name>addCookieServlet</servlet-name>
+  	<servlet-class>web.AddCookieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>addCookieServlet</servlet-name>
+  	<url-pattern>/addCookie</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>findCookieServlet</servlet-name>
+  	<servlet-class>web.FindCookieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>findCookieServlet</servlet-name>
+  	<url-pattern>/findCookie</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>findAddCookieServlet</servlet-name>
+  	<servlet-class>web.FindAddCookieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>findAddCookieServlet</servlet-name>
+  	<url-pattern>/findAddCookie</url-pattern>
+  </servlet-mapping>
+</web-app>
