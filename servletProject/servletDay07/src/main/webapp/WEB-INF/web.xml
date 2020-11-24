@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ykt2019servletDay07</display-name>
+  
+  <!-- 全局的初始化参数 -->
+  <context-param>
+  	<param-name>username</param-name>
+  	<param-value>admin</param-value>
+  </context-param>
+  
+  <servlet>
+  	<servlet-name>someServlet</servlet-name>
+  	<servlet-class>web.SomeServlet</servlet-class>
+  	<!-- 
+  		配置启动加载:即容器启动之后会立刻创建相应的实例
+  		值是大于等于0的整数,值越小,优先级越高(优先被创建)
+  	 -->
+  	<!-- <load-on-startup>1</load-on-startup> -->
+  	<!-- 局部的初始化参数 -->
+  	<!-- <init-param>
+  		<param-name>username</param-name>
+  		<param-value>admin</param-value>
+  	</init-param> -->
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>someServlet</servlet-name>
+  	<url-pattern>/some</url-pattern>
+  </servlet-mapping>
+  
+  <!-- <servlet>
+  	<servlet-name>someServlet2</servlet-name>
+  	<servlet-class>web.SomeServlet2</servlet-class>
+  	
+  		配置启动加载:即容器启动之后会立刻创建相应的实例
+  		值是大于等于0的整数,值越小,优先级越高(优先被创建)
+  	
+  	<load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>someServlet2</servlet-name>
+  	<url-pattern>/some2</url-pattern>
+  </servlet-mapping> -->
+
+</web-app>
