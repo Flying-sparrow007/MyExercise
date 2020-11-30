@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+
+	<tlib-version>1.1</tlib-version>
+	<short-name>d</short-name>
+	<uri>http://ykt.cn/tag</uri>
+	
+	<tag>
+    <name>date</name>
+    <!-- 包名.类名 -->
+    <tag-class>tag.DateTag</tag-class>
+    <!-- 
+    	<body-content>标签内容有三个值:
+    	empty:该标签没有标签体
+    	scriptless:该标签可以有标签体,但是标签体的内容不能够出现Java代码
+    	JSP:该标签可以有标签体,并且该标签体的内容可以出现Java代码,但是只有复杂标签技术才支持
+     -->
+    <body-content>empty</body-content>
+    <attribute>
+        <name>pattern</name>
+        <!-- true:该属性是一个必选的属性 -->
+        <required>true</required>
+        <!-- true:该属性值可以动态赋值(可以使用EL标签是来赋值) -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+</taglib>

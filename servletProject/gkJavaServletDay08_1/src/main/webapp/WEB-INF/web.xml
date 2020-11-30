@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>gkJavaServletDay08_1</display-name>
+  <servlet>
+    <servlet-name>find</servlet-name>
+    <servlet-class>web.ActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>find</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>filterServlet</filter-name>
+    <filter-class>web.FilterServlet</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filterServlet</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>web.CountListener</listener-class>
+  </listener>
+  <jsp-config>
+    <taglib>
+      <taglib-uri>http://ykt.cn/tag</taglib-uri>
+      <taglib-location>/myTag.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+</web-app>
