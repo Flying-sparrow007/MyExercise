@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+    
+  <tlib-version>1.1</tlib-version>
+  <short-name>d</short-name>
+  <uri>http://java.gk.cn/tag</uri>
+  
+  <tag>
+    <description>
+        这是一个描述时间的标签
+    </description>
+    <!-- 标签描述 -->
+    <name>date</name>
+    <!-- 标签类的位置 -->
+    <tag-class>tag.DateTag</tag-class>
+    <!-- empty表示标签内不能赋值 -->
+    <body-content>empty</body-content>
+    <attribute>
+        <description>
+			这个属性是表示时间以什么格式编写的
+        </description>
+        <name>timeFormat</name>
+        <!-- 为true标签表示必须含有该属性 -->
+        <required>true</required>
+        <!-- 表示该标签可以动态赋值(可以用EL表达式赋值) -->
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  
+</taglib>
