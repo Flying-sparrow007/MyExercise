@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="test">
+	<!-- 
+		id:必须是唯一的
+		resultType:返回指定的类型(包名.类名)
+	 -->
+	<select id="findAllUser" resultType="entity.User">
+		select * from user;
+	</select>
+	
+	<!-- parameterType:参数类型(包名.类名) -->
+	<insert id="addUser" parameterType="entity.User">
+		insert into user values (null, #{user_name}, #{user_password}, #{sal}, #{user_age});
+	</insert>
+	
+	<delete id="deleteUserById" parameterType="int">
+		delete from user where id = #{userId};
+	</delete>
+	
+	<update id="updateUserById" parameterType="entity.User">
+		update user set user_name = #{user_name},user_password = #{user_password} where id = #{id};
+	</update>
+	
+	<!-- 
+		mybatis会先将记录的数据存放到一个对应的map对象里面(中间结果),
+		然后再将map中的数据存放到对应的实体类里面,resultType的值如果是java.util.Map,
+		可以简写成map
+	 -->
+	 <select id="findUserById" parameterType="int" resultType="map">
+	 	select * from user where id = #{id};
+	 </select>
+	
+	<!-- 
+		处理对象字段和数据库字段不一致问题
+		<resultMap>实体类和数据库字段对应关系
+		property:实体类中的属性
+		column:数据库中的字段
+	 -->
+	 <resultMap type="entity.User2" id="rm">
+	 	<result property="userId" column="id"/>
+	 	<result property="userName" column="user_name"/>
+	 	<result property="userPassword" column="user_password"/>
+		<result property="userSal" column="sal"/>
+		<result property="userAge" column="user_age"/>
+	 </resultMap>
+	 
+	 <select id="findUserById2" parameterType="int" resultMap="rm">
+	 	select * from user where id = #{id};
+	 </select>
+	 
+	 <select id="addUser2" parameterType="entity.User2">
+	 	insert into user values (
+	 		null,
+	 		#{userName},
+	 		#{userPassword},
+	 		#{userSal},
+	 		#{userAge}
+	 	);
+	 </select>
+</mapper>

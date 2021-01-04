@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" 
+ "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+	<!-- 配置mybatis配置文件 -->
+	<configuration>
+		<!-- 
+			environments:指定数据库相关信息
+			default:默认使用哪一个数据库环境
+		 -->
+		<environments default="store">
+			<environment id="store">
+				<!-- transactionManager 采用JDBC相关事务 -->
+				<transactionManager type="JDBC" />
+					<!-- dataSource type="POOLED":是一个数据库连接池 -->
+					<dataSource type="POOLED">
+						<!-- 连接池相关属性 -->
+						<property name="driver" value="com.mysql.jdbc.Driver"/>
+						<property name="username" value="root"/>
+						<property name="password" value="984264"/>
+						<property name="url" value="jdbc:mysql://localhost:3306/store_ykt"/>
+					</dataSource>
+			</environment>
+			
+			<environment id="myDB">
+				<!-- transactionManager 采用JDBC相关事务 -->
+				<transactionManager type="JDBC" />
+					<!-- dataSource type="POOLED":是一个数据库连接池 -->
+					<dataSource type="POOLED">
+						<!-- 连接池相关属性 -->
+						<property name="driver" value="com.mysql.jdbc.Driver"/>
+						<property name="username" value="root"/>
+						<property name="password" value="984264"/>
+						<property name="url" value="jdbc:mysql://localhost:3306/store_ykt"/>
+					</dataSource>
+			</environment>
+		</environments>
+		<!-- 配置指定映射器(指定mybatis数据操作配置所在的地址) -->
+		<mappers>
+			<mapper resource="entity/userMapper.xml" />
+		</mappers>
+	</configuration>
