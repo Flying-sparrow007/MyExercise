@@ -1,0 +1,31 @@
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间指的是映射器的地址全名(包名.类名) -->
+<mapper namespace="com.gk.gkJavaSpring_ssm.login.mapper.UserMapper">
+	
+	<!-- 解决数据库字段和实体类中属性不一致问题 -->
+	<resultMap type="com.gk.gkJavaSpring_ssm.login.entity.User" id="rm">
+		<result property="userId" column="id"/>
+		<result property="userName" column="user_name"/>
+		<result property="userPwd" column="user_password"/>
+		<result property="userSal" column="sal"/>
+		<result property="userAge" column="user_age"/>
+	</resultMap>
+
+	<insert id="addUser" parameterType="com.gk.gkJavaSpring_ssm.login.entity.User">
+		insert into user values (null, #{userName}, #{userPwd}, #{userSal}, #{userAge});
+	</insert>
+	
+	<delete id="deleteById" parameterType="int">
+		deletes from user where id = #{id};
+	</delete>
+	
+	<update id="updateUserById">
+		update user set sal = sal - #{sal} where id = #{id};
+	</update>
+	
+	<update id="updateUserById2">
+		update user set sal = sal + #{sal} where id = #{id};
+	</update>
+</mapper>
