@@ -1,0 +1,91 @@
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gk.retailers.mapper.register.UserMapper">
+	<!-- 作业:实体类和数据库对应上 -->
+	<resultMap type="com.gk.retailers.entity.User" id="rm">
+		<result property="id" column="id"/>
+		<result property="userName" column="username"/>
+		<result property="password" column="password"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="image" column="image"/>
+		<result property="gender" column="gender"/>
+		<result property="createUser" column="create_user"/>
+		<result property="createTime" column="create_time"/>
+		<result property="modifiedUser" column="modified_user"/>
+		<result property="modifiedTime" column="modified_time"/>
+	</resultMap>
+	
+	<!-- 查询用户名是否被占用 -->
+	<select id="findCountByNameMapper" parameterType="string" resultType="int">
+		select count(id) from t_user where username = #{name};
+	</select>
+	
+	<!-- 用户注册 -->
+	<insert id="addUserMapper" parameterType="com.gk.retailers.entity.User">
+		insert into t_user
+					 values (
+					 	null,
+					 	#{userName},
+					 	#{password},
+					 	#{email},
+					 	#{phone},
+					 	#{image},
+					 	#{gender},
+					 	#{userName},
+					 	now(),
+					 	#{userName},
+					 	now()
+					 );
+	</insert>
+	
+	<!-- 用户登录 -->
+	<select id="findUserByPwdAndNameMapper" resultMap="rm">
+		select id,username,password,email,phone,image,gender,create_user,create_time,modified_user,modified_time 
+		from t_user where username = #{name} and password = #{pwd};
+	</select>
+	
+	<!-- 根据用户id修改用户图片 -->
+	<update id="updateUserImageByIdMapper">
+		update t_user set image = #{image} where id = #{uId};
+	</update>
+	
+	<!-- 根据用户id查询用户数据 -->
+	<select id="findUserByIdMapper" parameterType="int" resultMap="rm">
+		select id,username,password,email,phone,image,gender,create_user,create_time,modified_user,modified_time 
+		from t_user where id = #{id}
+	</select>
+	
+	<!-- 根据用户id修改用户相关数据 -->
+	<update id="updateUserByIdMapper" parameterType="com.gk.retailers.entity.User">
+		update t_user 
+		set 
+		<!-- 
+			<trim suffixOverrides=",">清空最后一个逗号","
+			suffix(后缀),Overrides最后一个后最覆盖前一个后缀,例如最后一个是null或者空字符串("",即if语句不满足),
+			倒数第二个逗号自然被取消,没有逗号的后缀覆盖(重写)
+		 -->
+		<trim suffixOverrides=",">
+			modified_time = now(),
+			
+			<if test="userName != null and userName != ''">
+				username = #{userName},
+			</if>
+			<if test="gender != null and gender != ''">
+				gender = #{gender},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone = #{phone},
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				modified_user = #{userName},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email}
+			</if>
+			
+		</trim>
+		where id = #{id};
+	</update>
+</mapper>
